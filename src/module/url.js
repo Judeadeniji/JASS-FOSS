@@ -22,7 +22,6 @@ const processUrls = (obj) => {
         obj[key] = `url(${url})`;
       }
     } else if (typeof obj[key] === "object") {
-      console.log("processing URLs")
       processUrls(obj[key]);
     }
   }

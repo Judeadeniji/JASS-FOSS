@@ -8,11 +8,11 @@ const parse = require("./module/parse");
 const url = require("./module/url");
 const applyShorthand = require("./module/shorthand");
 
-const Jass = () => {
+ const Jass = () => {
+  
   this.createCss = (objPath, output) => {
-    var start = performance.now();
+ 
     const obj = require(objPath);
-    console.log("Jass Compiler Started ...");
     let css = keyParser(obj);
         css = url(css);
         css = applyExtends(css);
@@ -27,9 +27,6 @@ const Jass = () => {
         if ( result.map ) {
         fs.writeFile(output+'.map', result.map.toString(), () => true)
       }
-        var end = performance.now();
-        console.log(`Compiled in ${(end - start) / 1000}s \n`);
-        console.log(`Done... Saved to ${output}`);
       });
   };
 };

@@ -28,8 +28,6 @@ const parse = (obj, parentSelector = '') => {
         } else {
             css += `  ${parentSelector}${key}: ${value};\n`;
         }
-        
-        console.log("Compiling...")
     }
     return css;
 };

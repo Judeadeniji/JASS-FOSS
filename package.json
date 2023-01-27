@@ -3,8 +3,10 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "node build.js"
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "bin": {
+    "jass": "bin/build.js"
   },
   "keywords": [],
   "author": "feranmiwebdev",
@@ -25,6 +27,8 @@
     "webpack-cli": "^5.0.1"
   },
   "dependencies": {
-    "figlet": "^1.5.2"
+    "figlet": "^1.5.2",
+    "minimist": "^1.2.7",
+    "ora": "^6.1.2"
   }
 }
