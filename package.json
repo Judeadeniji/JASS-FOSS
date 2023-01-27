@@ -1,0 +1,30 @@
+{
+  "name": "jass",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "node build.js"
+  },
+  "keywords": [],
+  "author": "feranmiwebdev",
+  "license": "ISC",
+  "description": "a javascript preprocessor for css",
+  "devDependencies": {
+    "@babel/core": "^7.12.0",
+    "autoprefixer": "^10.4.13",
+    "babel-cli": "^6.26.0",
+    "babel-loader": "^9.1.2",
+    "babel-preset-env": "^1.7.0",
+    "eslint": "^8.32.0",
+    "mime": "^3.0.0",
+    "postcss": "^8.4.21",
+    "postcss-cli": "^10.1.0",
+    "postcss-nested": "^6.0.0",
+    "webpack": "^5.75.0",
+    "webpack-cli": "^5.0.1"
+  },
+  "dependencies": {
+    "figlet": "^1.5.2"
+  }
+}
