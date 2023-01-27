@@ -1,2 +1,2 @@
 # JASS-FOSS
-Just another Sassy StyleCript
+Just another Sassy StyleScript
