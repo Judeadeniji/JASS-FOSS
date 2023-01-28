@@ -8,25 +8,29 @@ const parse = require("./module/parse");
 const url = require("./module/url");
 const applyShorthand = require("./module/shorthand");
 
- const Jass = () => {
-  
+const Jass = () => {
+  this.compile = (object) => {
+
+    let css = keyParser(object);
+    css = url(css);
+    css = applyExtends(css);
+    css = applyShorthand(css);
+    css = preParse(css);
+    css = parse(css);
+
+    return css;
+  };
+
   this.createCss = (objPath, output) => {
- 
-    const obj = require(objPath);
-    let css = keyParser(obj);
-        css = url(css);
-        css = applyExtends(css);
-        css = applyShorthand(css);
-        css = preParse(css);
-        css = parse(css);
+    const css = this.compile(objPath);
 
     postcss([postcssNested, require("autoprefixer")])
       .process(css, { from: undefined })
       .then((result) => {
         fs.writeFileSync(output, result.css);
-        if ( result.map ) {
-        fs.writeFile(output+'.map', result.map.toString(), () => true)
-      }
+        if (result.map) {
+          fs.writeFile(output + ".map", result.map.toString(), () => true);
+        }
       });
   };
 };
