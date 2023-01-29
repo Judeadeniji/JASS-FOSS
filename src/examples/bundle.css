@@ -1,0 +1,108 @@
+.card {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    text-align: center;
+    font-family: Arial;
+}
+.card.active {
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.2);
+}
+.card:hover {
+    cursor: pointer;
+    transform: translateY(-5px);
+}
+.card:focus {
+    outline: none;
+    border: 2px solid #0074D9;
+}
+.card .card-image {
+    width: 100%;
+    border-radius: 8px 8px 0 0;
+}
+.card .card-title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-top: 20px;
+}
+.card .card-text {
+    font-size: 16px;
+    line-height: 1.5;
+    margin: 20px 0;
+}
+.card .card-actions {
+    margin-top: 20px;
+    text-align: center;
+}
+.card .card-actions button {
+    background-color: #0074D9;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    font-size: 16px;
+}
+.card .card-actions button:hover {
+    background-color: #7FDBFF;
+}
+.card .card-actions button:focus {
+    outline: none;
+}
+.paper {
+    background-color: blue;
+    border-radius: 8px;
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    text-align: center;
+    font-family: Arial;
+}
+.paper.active {
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.2);
+}
+.paper:hover {
+    cursor: pointer;
+    transform: translateY(-5px);
+}
+.paper:focus {
+    outline: none;
+    border: 2px solid #0074D9;
+}
+.paper .card-image {
+    width: 100%;
+    border-radius: 8px 8px 0 0;
+}
+.paper .card-title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-top: 20px;
+}
+.paper .card-text {
+    font-size: 16px;
+    line-height: 1.5;
+    margin: 20px 0;
+}
+.paper .card-actions {
+    margin-top: 20px;
+    text-align: center;
+}
+.paper .card-actions button {
+    background-color: #0074D9;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    font-size: 16px;
+}
+.paper .card-actions button:hover {
+    background-color: #7FDBFF;
+}
+.paper .card-actions button:focus {
+    outline: none;
+}
+.paper {
+    background-image: url(https://well);
+    border-width: 2px;
+    border-color: #000;
+    border-style: solid;
+}

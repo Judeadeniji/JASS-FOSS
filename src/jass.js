@@ -9,30 +9,49 @@ const url = require("./module/url");
 const applyShorthand = require("./module/shorthand");
 
 const Jass = () => {
-  this.compile = (object) => {
-
+  const compile = (obj) => {
+    const object = require(obj);
+    
     let css = keyParser(object);
-    css = url(css);
-    css = applyExtends(css);
-    css = applyShorthand(css);
-    css = preParse(css);
-    css = parse(css);
 
+    try {
+      css = url(css);
+      css = applyExtends(css);
+      css = applyShorthand(css);
+      css = preParse(css);
+      css = parse(css);
+
+    } catch (e) {
+      console.error(e);
+      return 'error';
+    }
     return css;
   };
 
-  this.createCss = (objPath, output) => {
-    const css = this.compile(objPath);
+  const createCss = (objPath, output) => {
+    try {
+        const css = compile(objPath);
 
-    postcss([postcssNested, require("autoprefixer")])
-      .process(css, { from: undefined })
-      .then((result) => {
-        fs.writeFileSync(output, result.css);
-        if (result.map) {
-          fs.writeFile(output + ".map", result.map.toString(), () => true);
-        }
-      });
+        postcss([postcssNested, require("autoprefixer")])
+          .process(css, { from: undefined })
+          .then((result) => {
+            fs.writeFileSync(output, result.css);
+            if (result.map) {
+              fs.writeFileSync(output + ".map", result.map.toString());
+            }
+          });
+        return "success";
+    } catch (error) {
+        console.log(error);
+        return "error";
+    }
+};
+
+
+  return {
+    compile,
+    createCss
   };
 };
 
-module.export = Jass();
+module.exports = Jass();
