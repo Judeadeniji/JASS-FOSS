@@ -54,7 +54,7 @@ const build = async (input, out) => {
       var end = performance.now();
       setTimeout(function () {
         spinner.succeed(`Compiled in ${(end - start) / 1000}s\n`);
-      }, 5000);
+      }, 0);
 
       setTimeout(function () {
         console.log(

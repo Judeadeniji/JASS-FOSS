@@ -6,13 +6,43 @@ function expandShorthandProperties(styles) {
         styles["border-width"] = styles[key].width;
         styles["border-color"] = styles[key].color;
         styles["border-style"] = styles[key].style;
+//border top
+        styles["border-top-width"] = styles[key].top?.width;
+        styles["border-top-color"] = styles[key].top?.color;
+        styles["border-top-style"] = styles[key].top?.style;
+ //border right
+        styles["border-right-width"] = styles[key].right?.width;
+        styles["border-right-color"] = styles[key].right?.color;
+        styles["border-right-style"] = styles[key].right?.style;
+ //border left
+        styles["border-left-width"] = styles[key].left?.width;
+        styles["border-left-color"] = styles[key].left?.color;
+        styles["border-left-style"] = styles[key].left?.style;
+ //border bottom
+        styles["border-bottom-width"] = styles[key].bottom?.width;
+        styles["border-bottom-color"] = styles[key].bottom?.color;
+        styles["border-bottom-style"] = styles[key].bottom?.style;
+ //border right
+        styles["border-right-width"] = styles[key].right?.width;
+        styles["border-right-color"] = styles[key].right?.color;
+        styles["border-right-style"] = styles[key].right?.style;
+// border side shorthand
+        styles["border-top"] = typeof styles[key]?.top !== 'object' ? styles[key]?.top : undefined;
+        
+        styles["border-right"] = typeof styles[key]?.right !== 'object' ? styles[key]?.right : undefined;
+        
+        styles["border-left"] = typeof styles[key]?.left !== 'object' ? styles[key]?.left : undefined;
+        
+        styles["border-bottom"] = typeof styles[key]?.bottom !== 'object' ?
+        styles[key]?. bottom : undefined;
         delete styles[key];
       } else if (key === "background") {
         styles["background-color"] = styles[key].color;
-        styles['background-image'] = styles[key].image;
+        styles["background-image"] = styles[key].image;
         styles["background-repeat"] = styles[key].repeat;
         styles["background-attachment"] = styles[key].attachment;
         styles["background-position"] = styles[key].position;
+        styles["background-size"] = styles[key].size;
         delete styles[key];
       } else if (key === "border-bottom") {
         styles["border-bottom-width"] = styles[key].width;

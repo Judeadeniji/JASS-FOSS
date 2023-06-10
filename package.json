@@ -1,6 +1,6 @@
 {
   "name": "jass-cli",
-  "version": "1.0.11",
+  "version": "1.2.0",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -12,20 +12,14 @@
   "author": "Adeniji OluwaFeranmi",
   "license": "ISC",
   "description": "a javascript preprocessor for css",
-  "devDependencies": {
-    "@babel/core": "^7.12.0",
+  "dependencies": {
     "autoprefixer": "^10.4.13",
-    "babel-cli": "^6.26.0",
-    "babel-loader": "^9.1.2",
-    "babel-preset-env": "^1.7.0",
-    "mime": "^3.0.0",
     "postcss": "^8.4.21",
     "postcss-cli": "^10.1.0",
-    "postcss-nested": "^6.0.0"
-  },
-  "dependencies": {
+    "postcss-nested": "^6.0.0",
+    "mime": "^3.0.0",
     "figlet": "^1.5.2",
-    "jass-cli-loader": "^1.0.3",
+    "jass-cli-loader": "^1.2.0",
     "minimist": "^1.2.7",
     "ora": "^6.1.2"
   }
