@@ -1,6 +1,6 @@
-Jass - Just another Sloppy StyleScript
+Jass - Just another Sassy StyleScript
 
-# Jass - Just another Sloppy StyleScript
+# Jass - Just another Sassy StyleScript
 
 Jass is a FOSS CSS preprocessor written in JavaScript. It allows users to write CSS like JavaScript objects, and provides a number of features to make styling more convenient and efficient.
 
