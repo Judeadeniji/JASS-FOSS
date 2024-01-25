@@ -1,9 +1,10 @@
 {
   "name": "jass-cli",
-  "version": "1.2.0",
-  "main": "index.js",
+  "version": "1.2.1",
+  "main": "dist/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc"
   },
   "bin": {
     "jass": "bin/build.js"
@@ -14,13 +15,15 @@
   "description": "a javascript preprocessor for css",
   "dependencies": {
     "autoprefixer": "^10.4.13",
-    "postcss": "^8.4.21",
-    "postcss-cli": "^10.1.0",
-    "postcss-nested": "^6.0.0",
-    "mime": "^3.0.0",
     "figlet": "^1.5.2",
-    "jass-cli-loader": "^1.2.0",
+    "mime": "^3.0.0",
     "minimist": "^1.2.7",
-    "ora": "^6.1.2"
+    "ora": "^6.1.2",
+    "postcss": "^8.4.21",
+    "postcss-nested": "^6.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.6",
+    "typescript": "^5.3.3"
   }
 }

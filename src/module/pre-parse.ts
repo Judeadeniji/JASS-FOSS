@@ -10,4 +10,4 @@ function beforeParse(obj) {
 }
 
 
-module.exports = beforeParse;
+export default beforeParse
