@@ -1,18 +1,11 @@
 import * as path from "path";
 import * as fs from "fs";
 import * as mime from "mime";
+import type { CSSDeclaration, UrlObject } from "../utils/types"
 
-interface UrlObject {
-  url: string;
-}
-
-type StyleObject = {
-  [key: string]: string | UrlObject | StyleObject;
-};
-
-const processUrls = (obj: StyleObject): StyleObject => {
+const processUrls = (obj: CSSDeclaration): CSSDeclaration => {
   for (const key in obj) {
-    if (obj[key] && typeof obj[key] === "object" && obj[key].hasOwnProperty("url")) {
+    if (obj[key] && typeof obj[key] === "object" && obj[key]?.hasOwnProperty("url")) {
       let url = (obj[key] as UrlObject).url;
 
       if (!url.startsWith("http")) {
@@ -26,7 +19,7 @@ const processUrls = (obj: StyleObject): StyleObject => {
         obj[key] = `url(${url})`;
       }
     } else if (typeof obj[key] === "object") {
-      processUrls(obj[key] as StyleObject);
+      processUrls(obj[key] as CSSDeclaration );
     }
   }
   return obj;

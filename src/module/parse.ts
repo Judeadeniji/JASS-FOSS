@@ -1,10 +1,6 @@
-interface StyleObject {
-  [key: string]: StyleValue;
-}
+import type { CSSDeclaration } from "../utils/types"
 
-type StyleValue = StyleObject | string | number | boolean | null | undefined;
-
-const parse = (obj: StyleObject, parentSelector: string = ''): string => {
+const parse = (obj: CSSDeclaration, parentSelector: string = ''): string => {
   let css = '';
   for (const [key, value] of Object.entries(obj)) {
     if (typeof value === 'object') {
@@ -12,7 +8,7 @@ const parse = (obj: StyleObject, parentSelector: string = ''): string => {
       newSelector = newSelector.replace(/\+/g, `${parentSelector} +`);
       newSelector = newSelector.replace(/~/g, `${parentSelector} ~`);
       css += `${newSelector} {\n`;
-      css += parse(value as StyleObject, `  `);
+      css += parse(value as CSSDeclaration , `  `);
       css += `}\n`;
     } else {
       css += `  ${parentSelector}${key}: ${typeof value === "number" ? `${value}px` : value};\n`;

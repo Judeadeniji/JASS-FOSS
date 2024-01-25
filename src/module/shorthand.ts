@@ -1,6 +1,4 @@
-interface StylesObject {
-  [key: string]: StylesValue;
-}
+import type { CSSDeclaration } from "../utils/types"
 
 interface ShorthandBorder {
   width?: string;
@@ -12,12 +10,10 @@ interface ShorthandBorder {
   left?: ShorthandBorder;
 }
 
-type StylesValue = StylesObject | string | number | boolean | null | undefined | ShorthandBorder;
-
-function expandShorthandProperties(styles: StylesObject): StylesObject {
+function expandShorthandProperties(styles: CSSDeclaration): CSSDeclaration {
   for (const key in styles) {
     if (typeof styles[key] === "object") {
-      expandShorthandProperties(styles[key] as StylesObject);
+      expandShorthandProperties(styles[key] as CSSDeclaration );
 
       if (key === "border") {
         const shorthandBorder = styles[key] as ShorthandBorder;
@@ -49,7 +45,7 @@ function expandShorthandProperties(styles: StylesObject): StylesObject {
 
         delete styles[key];
       } else if (key === "background") {
-        const background = styles[key] as StylesObject;
+        const background = styles[key] as CSSDeclaration ;
 
         styles["background-color"] = background.color;
         styles["background-image"] = background.image;
@@ -92,7 +88,7 @@ function expandShorthandProperties(styles: StylesObject): StylesObject {
 
         delete styles[key];
       } else if (key === "font") {
-        const font = styles[key] as StylesObject;
+        const font = styles[key] as CSSDeclaration ;
 
         styles["font-style"] = font.style;
         styles["font-variant"] = font.variant;
@@ -103,7 +99,7 @@ function expandShorthandProperties(styles: StylesObject): StylesObject {
 
         delete styles[key];
       } else if (key === "margin") {
-        const margin = styles[key] as StylesObject;
+        const margin = styles[key] as CSSDeclaration ;
 
         styles["margin-top"] = margin.top;
         styles["margin-right"] = margin.right;
@@ -112,7 +108,7 @@ function expandShorthandProperties(styles: StylesObject): StylesObject {
 
         delete styles[key];
       } else if (key === "padding") {
-        const padding = styles[key] as StylesObject;
+        const padding = styles[key] as CSSDeclaration ;
 
         styles["padding-top"] = padding.top;
         styles["padding-right"] = padding.right;
@@ -129,7 +125,7 @@ function expandShorthandProperties(styles: StylesObject): StylesObject {
 
         delete styles[key];
       } else if (key === "list-style") {
-        const listStyle = styles[key] as StylesObject;
+        const listStyle = styles[key] as CSSDeclaration ;
 
         styles["list-style-type"] = listStyle.type;
         styles["list-style-position"] = listStyle.position;
@@ -137,7 +133,7 @@ function expandShorthandProperties(styles: StylesObject): StylesObject {
 
         delete styles[key];
       } else if (key === "animation") {
-        const animation = styles[key] as StylesObject;
+        const animation = styles[key] as CSSDeclaration ;
 
         styles["animation-name"] = animation.name;
         styles["animation-duration"] = animation.duration;
@@ -150,7 +146,7 @@ function expandShorthandProperties(styles: StylesObject): StylesObject {
 
         delete styles[key];
       } else if (key === "transition") {
-        const transition = styles[key] as StylesObject;
+        const transition = styles[key] as CSSDeclaration ;
 
         styles["transition-property"] = transition.property;
         styles["transition-duration"] = transition.duration;
@@ -159,7 +155,7 @@ function expandShorthandProperties(styles: StylesObject): StylesObject {
 
         delete styles[key];
       } else if (key === "column") {
-        const column = styles[key] as StylesObject;
+        const column = styles[key] as CSSDeclaration ;
 
         styles["column-width"] = column.width;
         styles["column-count"] = column.count;
@@ -170,7 +166,7 @@ function expandShorthandProperties(styles: StylesObject): StylesObject {
 
         delete styles[key];
       } else if (key === "grid-template") {
-        const gridTemplate = styles[key] as StylesObject;
+        const gridTemplate = styles[key] as CSSDeclaration ;
 
         styles["grid-template-rows"] = gridTemplate.rows;
         styles["grid-template-columns"] = gridTemplate.columns;
@@ -182,7 +178,7 @@ function expandShorthandProperties(styles: StylesObject): StylesObject {
       ) {
         styles[key] = (styles[key] as string[]).join(" ");
       } else if (key === "grid-template") {
-        const gridTemplate = styles[key] as StylesObject;
+        const gridTemplate = styles[key] as CSSDeclaration ;
 
         styles["grid-template-rows"] = gridTemplate.rows;
         styles["grid-template-columns"] = gridTemplate.columns;
@@ -190,7 +186,7 @@ function expandShorthandProperties(styles: StylesObject): StylesObject {
 
         delete styles[key];
       } else if (key === "border-image") {
-        const borderImage = styles[key] as StylesObject;
+        const borderImage = styles[key] as CSSDeclaration ;
 
         styles["border-image-source"] = borderImage.source;
         styles["border-image-slice"] = borderImage.slice;

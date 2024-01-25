@@ -7,6 +7,8 @@ import preParse from "./module/pre-parse";
 import parse from "./module/parse";
 import url from "./module/url";
 import applyShorthand from "./module/shorthand";
+import type { CSSDeclaration } from "./utils/types"
+
 
 interface PostcssConfig {
   plugins?: any[];
@@ -20,7 +22,7 @@ async function postProcess(css: string, postcssConfig: PostcssConfig = {}) {
   ]).process(css, { from: undefined })
 }
 
-const compile = (obj: any) => {
+const compile = (obj: CSSDeclaration | string) => {
   const object = typeof obj === "object" ? obj : require(obj);
 
   let css = keyParser(object);
@@ -38,7 +40,7 @@ const compile = (obj: any) => {
   return css as unknown as string;
 };
 
-const createCss = (objPath: any, output: string) => {
+const createCss = (objPath: CSSDeclaration | string, output: string) => {
   try {
     const css = compile(objPath);
 
@@ -67,7 +69,7 @@ const createCss = (objPath: any, output: string) => {
   }
 };
 
-const transpile = async (obj: any, postcssConfig: PostcssConfig = {}) => {
+const transpile = async (obj: CSSDeclaration | string, postcssConfig: PostcssConfig = {}) => {
   const css = compile(obj);
 
   const result = await postProcess(css, postcssConfig);

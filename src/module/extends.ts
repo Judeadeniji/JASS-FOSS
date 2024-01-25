@@ -1,18 +1,13 @@
 import deepAssign from "../utils/deep-assign";
+import type { CSSDeclaration } from "../utils/types"
 
-interface StyleObject {
-  [key: string]: StyleValue;
-}
-
-type StyleValue = StyleObject | string | number | boolean | null | undefined;
-
-function processExtends(obj: StyleObject): StyleObject {
+function processExtends(obj: CSSDeclaration): CSSDeclaration  {
   for (const key in obj) {
     const value = obj[key]
     if (value && value["@extends"]) {
       const parentKey = value["@extends"];
       const parentKeys = parentKey.split(" ");
-      let parentStyle: StyleObject = obj;
+      let parentStyle: CSSDeclaration  = obj;
 
       for (let i = 0; i < parentKeys.length; i++) {
         if (!parentStyle[parentKeys[i]]) {
@@ -26,14 +21,14 @@ function processExtends(obj: StyleObject): StyleObject {
           );
           continue;
         }
-        parentStyle = parentStyle[parentKeys[i]] as StyleObject;
+        parentStyle = parentStyle[parentKeys[i]] as CSSDeclaration ;
       }
 
-      obj[key] = { ...parentStyle, ...(obj[key] as StyleObject) };
+      obj[key] = { ...parentStyle, ...(obj[key] as CSSDeclaration ) };
       deepAssign({}, obj[parentKey] as any, obj[key]);
       delete obj[key]?.["@extends"];
     } else if (typeof obj[key] === "object") {
-      processExtends(obj[key] as StyleObject);
+      processExtends(obj[key] as CSSDeclaration );
     }
   }
   return obj;
