@@ -7,8 +7,8 @@ import preParse from "./module/pre-parse";
 import parse from "./module/parse";
 import url from "./module/url";
 import applyShorthand from "./module/shorthand";
-import type { CSSDeclaration } from "./utils/types"
-
+import type { CSSDeclaration } from "./utils/types";
+import { pipe } from "./utils/types";
 
 interface PostcssConfig {
   plugins?: any[];
@@ -24,26 +24,52 @@ async function postProcess(css: string, postcssConfig: PostcssConfig = {}) {
 
 const compile = (obj: CSSDeclaration | string) => {
   const object = typeof obj === "object" ? obj : require(obj);
-
-  let css = keyParser(object);
+  
+  let css = '';
+  const styleFn = pipe(keyParser, url, applyExtends, applyShorthand, preParse, parse)
 
   try {
-    css = url(css);
-    css = applyExtends(css);
-    css = applyShorthand(css);
-    css = preParse(css);
-    css = parse(css) as any;
+    css = styleFn(object) as unknown as string
   } catch (e) {
-    console.error(e);
-    return "error";
+    throw e
   }
   return css as unknown as string;
 };
 
+const compileToProps = (style: CSSDeclaration) => {
+  const props = {};
+  
+  function parse(style: Record<any, any>) {
+    let style$ = '';
+    let properties = {};
+
+    for (const [property, value] of Object.entries(style)) {
+      properties[property] = value;
+    }
+
+    for (const [property, value] of Object.entries(properties)) {
+      style$ += `${property}: ${value}; `;
+    }
+
+    return { "style": style$.trim() };
+  }
+ 
+  const styleFn = pipe(keyParser, url, applyExtends, applyShorthand, preParse, parse);
+  for (const key in style) {
+    props[key] = styleFn(style[key]) as ReturnType<typeof parse>
+    Object.defineProperty(props, `_${key}`, {
+      get() {
+        return style[key]
+      }
+    })
+  }
+
+  return props;
+}
+
 const createCss = (objPath: CSSDeclaration | string, output: string) => {
   try {
     const css = compile(objPath);
-
     const currentYear = new Date().getFullYear();
 
     postProcess(css)
@@ -62,9 +88,11 @@ const createCss = (objPath: CSSDeclaration | string, output: string) => {
           fs.writeFileSync(output + ".map", result.map.toString());
         }
       });
+      
     return "success";
   } catch (error) {
-    console.log(error);
+    console.error(error);
+    
     return "error";
   }
 };
@@ -81,5 +109,6 @@ export {
   compile,
   createCss,
   transpile,
-  postProcess
+  postProcess,
+  compileToProps
 };

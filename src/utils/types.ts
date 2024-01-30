@@ -11,3 +11,9 @@ type CSSDeclarationValue = {
 export type CSSDeclaration = {
   [property: string]: typeof property extends string ? StyleValue | CSSDeclaration : never;
 };
+
+type PipeFunction<T, R> = (input: T) => R;
+
+export function pipe<T>(...functions: Array<PipeFunction<any, any>>): PipeFunction<T, any> {
+  return (input: T) => functions.reduce((result, fn) => fn(result), input);
+}
